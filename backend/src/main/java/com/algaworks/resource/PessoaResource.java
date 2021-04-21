@@ -42,7 +42,6 @@ public class PessoaResource {
 		return pessoaRepository.findAll();
 	}
 	
-	
 	@PostMapping
 	public ResponseEntity<Pessoa> criar(@Valid @RequestBody Pessoa pessoa, HttpServletResponse response) {
 		Pessoa pessoaSalva = pessoaRepository.save(pessoa);
@@ -51,7 +50,6 @@ public class PessoaResource {
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(pessoaSalva);
 	}
-	
 	
 	@GetMapping("/{codigo}")
 	public ResponseEntity<Pessoa> buscarPeloCodigo(@PathVariable Long codigo) {
@@ -72,4 +70,47 @@ public class PessoaResource {
 		
 		return ResponseEntity.ok(pessoaSalva);
 	}
+	
+	@PutMapping("/{codigo}/ativo")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void atualizarPropriedadeAtivo(@PathVariable Long codigo, @RequestBody Boolean ativo) {
+		pessoaService.atualizarPropriedadeAtivo(codigo, ativo);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
