@@ -17,9 +17,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
 import com.algaworks.model.Lancamento;
-import com.algaworks.model.mapper.Categoria_;
-import com.algaworks.model.mapper.Lancamento_;
-import com.algaworks.model.mapper.Pessoa_;
 import com.algaworks.repository.filter.LancamentoFilter;
 import com.algaworks.repository.projection.ResumoLancamento;
 
@@ -77,15 +74,15 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 		List<Predicate> predicates = new ArrayList<>();
 		
 		if (!StringUtils.isEmpty(lancamentoFilter.getDescricao())) {
-			predicates.add(builder.like(builder.lower(root.get(Lancamento_.descricao)), "%" + lancamentoFilter.getDescricao().toLowerCase() + "%"));
+			predicates.add(builder.like(builder.lower(root.get("descricao")), "%" + lancamentoFilter.getDescricao().toLowerCase() + "%"));
 		}
 		
 		if (lancamentoFilter.getDataVencimentoDe() != null) {
-			predicates.add(builder.greaterThanOrEqualTo(root.get(Lancamento_.dataVencimento), lancamentoFilter.getDataVencimentoDe()));
+			predicates.add(builder.greaterThanOrEqualTo(root.get("dataVencimento"), lancamentoFilter.getDataVencimentoDe()));
 		}
 		
 		if (lancamentoFilter.getDataVencimentoAte() != null) {
-			predicates.add(builder.lessThanOrEqualTo(root.get(Lancamento_.dataVencimento), lancamentoFilter.getDataVencimentoAte()));
+			predicates.add(builder.lessThanOrEqualTo(root.get("dataVencimento"), lancamentoFilter.getDataVencimentoAte()));
 		}
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
