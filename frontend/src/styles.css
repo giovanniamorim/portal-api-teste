@@ -1,15 +1,16 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   color: #404C51;
+  margin: 0 auto;
 }
 
 label {
   font-weight: bold;
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1600px) {
   .container {
-    width: 1170px;
+    width: 1570px;
     margin: 0 auto;
   }
 }
