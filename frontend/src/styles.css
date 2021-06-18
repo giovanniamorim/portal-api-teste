@@ -19,7 +19,7 @@ label {
 }
 
 .col-valor-content {
-  text-align: right;
+  text-align: right !important;
 }
 
 .col-data-header {
@@ -27,5 +27,18 @@ label {
 }
 
 .col-data-content {
-  text-align: center;
+  text-align: center !important;
+}
+
+.col-acoes-header {
+  width: 115px;
+}
+
+.col-acoes {
+  width: 115px;
+  text-align: center !important;
+}
+
+.col-acoes .p-button {
+  margin: 1px;
 }
