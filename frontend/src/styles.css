@@ -4,6 +4,15 @@ body {
   margin: 0 auto;
 }
 
+a {
+  color: #337AB7;
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  text-decoration: underline;
+}
+
 label {
   font-weight: bold;
 }
