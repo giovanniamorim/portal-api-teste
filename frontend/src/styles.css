@@ -17,6 +17,10 @@ label {
   font-weight: bold;
 }
 
+.p-button {
+  margin-right: .5rem;
+}
+
 @media screen and (min-width: 1600px) {
   .container {
     width: 1570px;
