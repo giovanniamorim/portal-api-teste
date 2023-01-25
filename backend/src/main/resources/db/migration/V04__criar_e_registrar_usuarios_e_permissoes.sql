@@ -32,6 +32,26 @@ INSERT INTO permissao (codigo, descricao) values (6, 'ROLE_CADASTRAR_LANCAMENTO'
 INSERT INTO permissao (codigo, descricao) values (7, 'ROLE_REMOVER_LANCAMENTO');
 INSERT INTO permissao (codigo, descricao) values (8, 'ROLE_PESQUISAR_LANCAMENTO');
 
+INSERT INTO permissao (codigo, descricao) values (9, 'ROLE_CADASTRAR_BALANCETE');
+INSERT INTO permissao (codigo, descricao) values (10, 'ROLE_REMOVER_BALANCETE');
+INSERT INTO permissao (codigo, descricao) values (11, 'ROLE_PESQUISAR_BALANCETE');
+
+INSERT INTO permissao (codigo, descricao) values (12, 'ROLE_CADASTRAR_BALANCO');
+INSERT INTO permissao (codigo, descricao) values (13, 'ROLE_REMOVER_BALANCO');
+INSERT INTO permissao (codigo, descricao) values (14, 'ROLE_PESQUISAR_BALANCO');
+
+INSERT INTO permissao (codigo, descricao) values (15, 'ROLE_CADASTRAR_PLANEJAMENTO');
+INSERT INTO permissao (codigo, descricao) values (16, 'ROLE_REMOVER_PLANEJAMENTO');
+INSERT INTO permissao (codigo, descricao) values (17, 'ROLE_PESQUISAR_PLANEJAMENTO');
+
+INSERT INTO permissao (codigo, descricao) values (18, 'ROLE_CADASTRAR_EXECUCAO');
+INSERT INTO permissao (codigo, descricao) values (19, 'ROLE_REMOVER_EXECUCAO');
+INSERT INTO permissao (codigo, descricao) values (20, 'ROLE_PESQUISAR_EXECUCAO');
+
+INSERT INTO permissao (codigo, descricao) values (21, 'ROLE_CADASTRAR_INVENTARIO');
+INSERT INTO permissao (codigo, descricao) values (22, 'ROLE_REMOVER_INVENTARIO');
+INSERT INTO permissao (codigo, descricao) values (23, 'ROLE_PESQUISAR_INVENTARIO');
+
 -- admin
 INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 1);
 INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 2);
@@ -41,8 +61,26 @@ INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 5);
 INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 6);
 INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 7);
 INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 8);
+INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 9);
+INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 10);
+INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 11);
+INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 12);
+INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 13);
+INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 14);
+INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 15);
+INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 16);
+INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 17);
+INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 18);
+INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 19);
+INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 20);
+INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 21);
+INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 22);
+INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (1, 23);
 
 -- maria
 INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (2, 2);
 INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (2, 5);
 INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (2, 8);
+INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (2, 9);
+INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (2, 10);
+INSERT INTO usuario_permissao (codigo_usuario, codigo_permissao) values (2, 11);

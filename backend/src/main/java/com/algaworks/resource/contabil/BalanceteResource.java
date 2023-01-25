@@ -1,7 +1,9 @@
 package com.algaworks.resource.contabil;
 
-import com.algaworks.model.contabil.Balancete;
-import com.algaworks.repository.contabil.BalanceteRepository;
+
+import com.algaworks.model.Balancete;
+import com.algaworks.repository.contabil.balancete.BalanceteRepository;
+import com.algaworks.repository.filter.BalanceteFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -28,15 +31,22 @@ public class BalanceteResource {
     @PostMapping
     @ResponseStatus(CREATED)
     public Balancete addBalancete(@RequestBody @Valid Balancete balancete)  {
-        if( balanceteRepository.existsByDescricao(balancete.getDescricao())){
-            throw new ResponseStatusException(BAD_REQUEST, "Já existe um Balancete cadastrado com este nome");
-        }
         return balanceteRepository.save(balancete);
     }
 
+//    @GetMapping
+//    public Page<Balancete> listAllBalances(@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC)Pageable pageable){
+//        return balanceteRepository.findAll(pageable);
+//    }
+
     @GetMapping
-    public Page<Balancete> listAllBalances(@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC)Pageable pageable){
-        return balanceteRepository.findAll(pageable);
+    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_BALANCETE') and #oauth2.hasScope('read')")
+    public Page<Balancete> pesquisar(
+            BalanceteFilter balanceteFilter,
+            @RequestParam(value = "page", required = false, defaultValue = "0") int page,
+            @RequestParam(value = "size", required = false, defaultValue = "5") int size,
+            @PageableDefault(page = 0, size = 5, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        return balanceteRepository.filtrar(balanceteFilter, pageable);
     }
 
     @GetMapping("/{id}")
@@ -60,7 +70,8 @@ public class BalanceteResource {
     public ResponseEntity<Balancete> editBalancete(@PathVariable Long id, @Valid @RequestBody Balancete newBalancete){
                return balanceteRepository.findById(id)
                 .map(balancete -> {
-                    balancete.setDescricao(newBalancete.getDescricao());
+                    balancete.setAno(newBalancete.getAno());
+                    balancete.setMes(newBalancete.getMes());
                     balancete.setFileUrl((newBalancete.getFileUrl()));
                     Balancete balanceteUpdated = balanceteRepository.save(balancete);
                     return ResponseEntity.ok().body(balanceteUpdated);

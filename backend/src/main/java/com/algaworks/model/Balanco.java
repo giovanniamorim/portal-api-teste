@@ -1,4 +1,4 @@
-package com.algaworks.model.contabil;
+package com.algaworks.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,14 +10,13 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "balancete")
-public class Balancete {
+@Table(name = "balanco")
+public class Balanco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String descricao;
+    private Long ano;
+    private String mes;
     private String fileUrl;
-
-
 }
