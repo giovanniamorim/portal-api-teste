@@ -5,19 +5,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "balancete")
-public class Balancete {
+@Table(name = "doc_assembleia")
+public class Assembleia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long ano;
-    private String mes;
+    private Date data;
+    private String tipo;
+    private String assunto;
+    private String comentario;
     private String fileUrl;
 
 }
+

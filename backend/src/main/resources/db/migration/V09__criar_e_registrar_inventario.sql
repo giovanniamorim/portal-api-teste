@@ -11,20 +11,20 @@ CREATE TABLE ctb_inventario (
 
 
 INSERT INTO ctb_inventario (id, data_aquisicao, departamento, numero, quant, descricao, estado_conservacao, file_url)
-    values (1, '2017-06-10', 'Secretaria', 'SEC001-SINDPA', 1, 'Impressora matricial', 'BOM', 'teste.jpg');
+    values (1, '2017-06-10', 'Secretaria', 'SEC001-SINDPA', 1, 'Impressora matricial', 'Novo', 'teste.jpg');
 
 INSERT INTO ctb_inventario (id, data_aquisicao, departamento, numero, quant, descricao, estado_conservacao, file_url)
-    values (2, '2018-06-10', 'Secretaria', 'SEC002-SINDPA', 1, 'Monitor LCD', 'NOVO', 'teste.jpg');
+    values (2, '2018-06-10', 'Secretaria', 'SEC002-SINDPA', 1, 'Monitor LCD', 'Bom', 'teste.jpg');
 
 INSERT INTO ctb_inventario (id, data_aquisicao, departamento, numero, quant, descricao, estado_conservacao, file_url)
-    values (3, '2018-08-10', 'Secretaria', 'SEC003-SINDPA', 1, 'Cabo de Impressora', 'SUCATA', 'teste.jpg');
+    values (3, '2018-08-10', 'Secretaria', 'SEC003-SINDPA', 1, 'Cabo de Impressora', 'Regular', 'teste.jpg');
 
 INSERT INTO ctb_inventario (id, data_aquisicao, departamento, numero, quant, descricao, estado_conservacao, file_url)
-    values (4, '2018-06-10', 'Cozinha', 'SEC004-SINDPA', 4, 'Panela de Ferro Tramontina', 'NOVA', 'teste.jpg');
+    values (4, '2018-06-10', 'Cozinha', 'SEC004-SINDPA', 4, 'Panela de Ferro Tramontina', 'Péssimo', 'teste.jpg');
 
 INSERT INTO ctb_inventario (id, data_aquisicao, departamento, numero, quant, descricao, estado_conservacao, file_url)
-    values (5, '2018-06-10', 'Secretaria', 'SEC005-SINDPA', 1, 'Computador Notebook Ace', 'SUCATA', 'teste.jpg');
+    values (5, '2018-06-10', 'Secretaria', 'SEC005-SINDPA', 1, 'Computador Notebook Ace', 'Sucata', 'teste.jpg');
 
 INSERT INTO ctb_inventario (id, data_aquisicao, departamento, numero, quant, descricao, estado_conservacao, file_url)
-    values (6, '2018-06-10', 'Cozinha', 'SEC006-SINDPA', 4, 'Geladeira', 'BOM', 'teste.jpg');
+    values (6, '2018-06-10', 'Cozinha', 'SEC006-SINDPA', 4, 'Geladeira', 'Novo', 'teste.jpg');
 

@@ -19,8 +19,6 @@ public class Inventario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dataAquisicao;
     private String departamento;
     private String numero;
