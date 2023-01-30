@@ -30,17 +30,13 @@ public class AssembleiaResource {
 
     @PostMapping
     @ResponseStatus(CREATED)
+    @PreAuthorize("hasAnyAuthority('ROLE_CREATE') and #oauth2.hasScope('write')")
     public Assembleia addInventari(@RequestBody @Valid Assembleia assembleia)  {
         return assembleiaRepository.save(assembleia);
     }
 
-//    @GetMapping
-//    public Page<Assembleia> listAllBalances(@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC)Pageable pageable){
-//        return assembleiaRepository.findAll(pageable);
-//    }
-
     @GetMapping
-    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_ASSEMBLEIA') and #oauth2.hasScope('read')")
+    @PreAuthorize("hasAnyAuthority('ROLE_READ') and #oauth2.hasScope('read')")
     public Page<Assembleia> pesquisar(
             AssembleiaFilter assembleiaFilter,
             @RequestParam(value = "page", required = false, defaultValue = "0") int page,
@@ -50,6 +46,7 @@ public class AssembleiaResource {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_READ') and #oauth2.hasScope('read')")
     public Assembleia findAssembleiaById(@PathVariable Long id) {
         return assembleiaRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
@@ -58,6 +55,7 @@ public class AssembleiaResource {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(NO_CONTENT)
+    @PreAuthorize("hasAnyAuthority('ROLE_DELETE') and #oauth2.hasScope('write')")
     public void deleteAssembleia(@PathVariable Long id) {
         assembleiaRepository.findById(id).map(assembleia -> {
             assembleiaRepository.delete(assembleia);
@@ -67,6 +65,7 @@ public class AssembleiaResource {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ROLE_UPDATE') and #oauth2.hasScope('write')")
     public ResponseEntity<Assembleia> editAssembleia(@PathVariable Long id, @Valid @RequestBody Assembleia newAssembleia){
         return assembleiaRepository.findById(id)
                 .map(assembleia -> {

@@ -30,17 +30,14 @@ public class BalanceteResource {
 
     @PostMapping
     @ResponseStatus(CREATED)
+    @PreAuthorize("hasAuthority('ROLE_CREATE') and #oauth2.hasScope('write')")
     public Balancete addBalancete(@RequestBody @Valid Balancete balancete)  {
         return balanceteRepository.save(balancete);
     }
 
-//    @GetMapping
-//    public Page<Balancete> listAllBalances(@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC)Pageable pageable){
-//        return balanceteRepository.findAll(pageable);
-//    }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_BALANCETE') and #oauth2.hasScope('read')")
+    @PreAuthorize("hasAuthority('ROLE_READ') and #oauth2.hasScope('read')")
     public Page<Balancete> pesquisar(
             BalanceteFilter balanceteFilter,
             @RequestParam(value = "page", required = false, defaultValue = "0") int page,
@@ -50,6 +47,7 @@ public class BalanceteResource {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_READ') and #oauth2.hasScope('read')")
     public Balancete findBalanceteById(@PathVariable Long id) {
         return balanceteRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
@@ -58,6 +56,7 @@ public class BalanceteResource {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(NO_CONTENT)
+    @PreAuthorize("hasAuthority('ROLE_DELETE') and #oauth2.hasScope('write')")
     public void deleteBalancete(@PathVariable Long id) {
         balanceteRepository.findById(id).map(user -> {
             balanceteRepository.delete(user);
@@ -67,6 +66,7 @@ public class BalanceteResource {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_UPDATE') and #oauth2.hasScope('write')")
     public ResponseEntity<Balancete> editBalancete(@PathVariable Long id, @Valid @RequestBody Balancete newBalancete){
                return balanceteRepository.findById(id)
                 .map(balancete -> {

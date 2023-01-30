@@ -27,20 +27,15 @@ public class ExecucaoResource {
     @Autowired
     ExecucaoRepository execucaoRepository;
 
-
     @PostMapping
     @ResponseStatus(CREATED)
+    @PreAuthorize("hasAuthority('ROLE_CREATE') and #oauth2.hasScope('write')")
     public Execucao addExecucao(@RequestBody @Valid Execucao execucao)  {
         return execucaoRepository.save(execucao);
     }
 
-//    @GetMapping
-//    public Page<Execucao> listAllBalances(@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC)Pageable pageable){
-//        return execucaoRepository.findAll(pageable);
-//    }
-
     @GetMapping
-    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_EXECUCAO') and #oauth2.hasScope('read')")
+    @PreAuthorize("hasAuthority('ROLE_READ') and #oauth2.hasScope('read')")
     public Page<Execucao> pesquisar(
             ExecucaoFilter execucaoFilter,
             @RequestParam(value = "page", required = false, defaultValue = "0") int page,
@@ -50,6 +45,7 @@ public class ExecucaoResource {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_READ') and #oauth2.hasScope('read')")
     public Execucao findExecucaoById(@PathVariable Long id) {
         return execucaoRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
@@ -58,6 +54,7 @@ public class ExecucaoResource {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(NO_CONTENT)
+    @PreAuthorize("hasAuthority('ROLE_DELETE') and #oauth2.hasScope('write')")
     public void deleteExecucao(@PathVariable Long id) {
         execucaoRepository.findById(id).map(user -> {
             execucaoRepository.delete(user);
@@ -67,6 +64,7 @@ public class ExecucaoResource {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_UPDATE') and #oauth2.hasScope('write')")
     public ResponseEntity<Execucao> editExecucao(@PathVariable Long id, @Valid @RequestBody Execucao newExecucao){
                return execucaoRepository.findById(id)
                 .map(execucao -> {
@@ -78,6 +76,5 @@ public class ExecucaoResource {
                 }).orElseThrow(() -> new ResponseStatusException(
                         NOT_FOUND, "Execucao não encontrado"));
     }
-
 
 }

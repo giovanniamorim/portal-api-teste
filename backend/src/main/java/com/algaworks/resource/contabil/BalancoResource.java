@@ -27,20 +27,15 @@ public class BalancoResource {
     @Autowired
     BalancoRepository balancoRepository;
 
-
     @PostMapping
     @ResponseStatus(CREATED)
+    @PreAuthorize("hasAuthority('ROLE_CREATE') and #oauth2.hasScope('write')")
     public Balanco addBalanco(@RequestBody @Valid Balanco balanco)  {
         return balancoRepository.save(balanco);
     }
 
-//    @GetMapping
-//    public Page<Balanco> listAllBalances(@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC)Pageable pageable){
-//        return balancoRepository.findAll(pageable);
-//    }
-
     @GetMapping
-    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_BALANCO') and #oauth2.hasScope('read')")
+    @PreAuthorize("hasAuthority('ROLE_READ') and #oauth2.hasScope('read')")
     public Page<Balanco> pesquisar(
             BalancoFilter balancoFilter,
             @RequestParam(value = "page", required = false, defaultValue = "0") int page,
@@ -50,6 +45,7 @@ public class BalancoResource {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_READ') and #oauth2.hasScope('read')")
     public Balanco findBalancoById(@PathVariable Long id) {
         return balancoRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
@@ -58,6 +54,7 @@ public class BalancoResource {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(NO_CONTENT)
+    @PreAuthorize("hasAuthority('ROLE_DELETE') and #oauth2.hasScope('write')")
     public void deleteBalanco(@PathVariable Long id) {
         balancoRepository.findById(id).map(user -> {
             balancoRepository.delete(user);
@@ -67,6 +64,7 @@ public class BalancoResource {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_UPDATE') and #oauth2.hasScope('write')")
     public ResponseEntity<Balanco> editBalanco(@PathVariable Long id, @Valid @RequestBody Balanco newBalanco){
                return balancoRepository.findById(id)
                 .map(balanco -> {
@@ -78,6 +76,5 @@ public class BalancoResource {
                 }).orElseThrow(() -> new ResponseStatusException(
                         NOT_FOUND, "Balanco não encontrado"));
     }
-
 
 }

@@ -32,10 +32,8 @@ public class PessoaResource {
 
 	@Autowired
 	private PessoaRepository pessoaRepository;
-	
 	@Autowired
 	private PessoaService pessoaService;
-	
 	@Autowired
 	private ApplicationEventPublisher publisher;
 	

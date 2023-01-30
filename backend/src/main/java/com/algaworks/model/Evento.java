@@ -1,8 +1,6 @@
 package com.algaworks.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,9 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "jur_evento")
-public class Evento implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class Evento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

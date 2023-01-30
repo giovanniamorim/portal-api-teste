@@ -1,9 +1,6 @@
 package com.algaworks.resource.contabil;
 
-
 import com.algaworks.model.Inventario;
-import com.algaworks.model.Inventario;
-import com.algaworks.repository.contabil.inventario.InventarioRepository;
 import com.algaworks.repository.contabil.inventario.InventarioRepository;
 import com.algaworks.repository.filter.InventarioFilter;
 import lombok.extern.slf4j.Slf4j;
@@ -32,17 +29,13 @@ public class InventarioResource {
 
     @PostMapping
     @ResponseStatus(CREATED)
+    @PreAuthorize("hasAuthority('ROLE_CREATE') and #oauth2.hasScope('write')")
     public Inventario addInventari(@RequestBody @Valid Inventario inventario)  {
         return inventarioRepository.save(inventario);
     }
 
-//    @GetMapping
-//    public Page<Inventario> listAllBalances(@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC)Pageable pageable){
-//        return inventarioRepository.findAll(pageable);
-//    }
-
     @GetMapping
-    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_INVENTARIO') and #oauth2.hasScope('read')")
+    @PreAuthorize("hasAuthority('ROLE_READ') and #oauth2.hasScope('read')")
     public Page<Inventario> pesquisar(
             InventarioFilter inventarioFilter,
             @RequestParam(value = "page", required = false, defaultValue = "0") int page,
@@ -52,6 +45,7 @@ public class InventarioResource {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_READ') and #oauth2.hasScope('read')")
     public Inventario findInventarioById(@PathVariable Long id) {
         return inventarioRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
@@ -60,6 +54,7 @@ public class InventarioResource {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(NO_CONTENT)
+    @PreAuthorize("hasAuthority('ROLE_DELETE') and #oauth2.hasScope('write')")
     public void deleteInventario(@PathVariable Long id) {
         inventarioRepository.findById(id).map(inventario -> {
             inventarioRepository.delete(inventario);
@@ -69,6 +64,7 @@ public class InventarioResource {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_UPDATE') and #oauth2.hasScope('write')")
     public ResponseEntity<Inventario> editInventario(@PathVariable Long id, @Valid @RequestBody Inventario newInventario){
         return inventarioRepository.findById(id)
                 .map(inventario -> {
@@ -84,6 +80,5 @@ public class InventarioResource {
                 }).orElseThrow(() -> new ResponseStatusException(
                         NOT_FOUND, "Inventário não encontrado"));
     }
-
 
 }

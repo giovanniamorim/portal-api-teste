@@ -30,18 +30,19 @@ public class EventoResource {
 
     @PostMapping
     @ResponseStatus(CREATED)
+    @PreAuthorize("hasAuthority('ROLE_CREATE') and #oauth2.hasScope('write')")
     public Evento addEventoJuridico(@RequestBody @Valid Evento evento)  {
         return eventoRepository.save(evento);
     }
 
-
     @GetMapping
-    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_JUR_EVENTO') and #oauth2.hasScope('read')")
+    @PreAuthorize("hasAuthority('ROLE_READ') and #oauth2.hasScope('read')")
     public Page<Evento> listAllBalances(@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC)Pageable pageable){
         return eventoRepository.findAll(pageable);
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_READ') and #oauth2.hasScope('read')")
     public Evento findEventoJuridicoById(@PathVariable Long id) {
         return eventoRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
@@ -50,6 +51,7 @@ public class EventoResource {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(NO_CONTENT)
+    @PreAuthorize("hasAuthority('ROLE_DELETE') and #oauth2.hasScope('write')")
     public void deleteEventoJuridico(@PathVariable Long id) {
         eventoRepository.findById(id).map(user -> {
             eventoRepository.delete(user);
@@ -59,6 +61,7 @@ public class EventoResource {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_UPDATE') and #oauth2.hasScope('write')")
     public ResponseEntity<Evento> editEventoJuridico(@PathVariable Long id, @Valid @RequestBody Evento newEvento){
         return eventoRepository.findById(id)
                 .map(evento -> {

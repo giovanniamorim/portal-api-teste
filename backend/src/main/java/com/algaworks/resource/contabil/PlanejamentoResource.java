@@ -27,20 +27,15 @@ public class PlanejamentoResource {
     @Autowired
     PlanejamentoRepository planejamentoRepository;
 
-
     @PostMapping
     @ResponseStatus(CREATED)
+    @PreAuthorize("hasAuthority('ROLE_CREATE') and #oauth2.hasScope('write')")
     public Planejamento addPlanejamento(@RequestBody @Valid Planejamento planejamento)  {
         return planejamentoRepository.save(planejamento);
     }
 
-//    @GetMapping
-//    public Page<Planejamento> listAllBalances(@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC)Pageable pageable){
-//        return planejamentoRepository.findAll(pageable);
-//    }
-
     @GetMapping
-    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_PLANEJAMENTO') and #oauth2.hasScope('read')")
+    @PreAuthorize("hasAuthority('ROLE_READ') and #oauth2.hasScope('read')")
     public Page<Planejamento> pesquisar(
             PlanejamentoFilter planejamentoFilter,
             @RequestParam(value = "page", required = false, defaultValue = "0") int page,
@@ -50,6 +45,7 @@ public class PlanejamentoResource {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_READ') and #oauth2.hasScope('read')")
     public Planejamento findPlanejamentoById(@PathVariable Long id) {
         return planejamentoRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
@@ -58,6 +54,7 @@ public class PlanejamentoResource {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(NO_CONTENT)
+    @PreAuthorize("hasAuthority('ROLE_DELETE') and #oauth2.hasScope('write')")
     public void deletePlanejamento(@PathVariable Long id) {
         planejamentoRepository.findById(id).map(user -> {
             planejamentoRepository.delete(user);
@@ -67,6 +64,7 @@ public class PlanejamentoResource {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_UPDATE') and #oauth2.hasScope('write')")
     public ResponseEntity<Planejamento> editPlanejamento(@PathVariable Long id, @Valid @RequestBody Planejamento newPlanejamento){
                return planejamentoRepository.findById(id)
                 .map(planejamento -> {
@@ -78,6 +76,5 @@ public class PlanejamentoResource {
                 }).orElseThrow(() -> new ResponseStatusException(
                         NOT_FOUND, "Planejamento não encontrado"));
     }
-
 
 }
